@@ -4,7 +4,7 @@ pipeline{
     stage('Compile'){
       agent any
       steps{
-        sh 'mvn compile'
+        sh 'echo Install Dependencies'
       }       
     }
     stage('Code Quality'){
@@ -16,7 +16,7 @@ pipeline{
     stage('Test'){
       agent any
       steps{
-        sh 'mvn test'
+        sh 'echo Test Python'
       }
     } 
     stage('Package'){
@@ -25,21 +25,25 @@ pipeline{
         sh 'echo Package Artifactory'
       }
     }
-    stage('Upload War File To Artifactory'){
+    stage('Upload File To Artifactory'){
       agent any
       steps{
-        sh 'echo Uploaded War file to Artifactory'
+        sh 'echo Uploaded file to Artifactory'
+      }
+    }
+     stage('Build'){
+      agent any
+      steps{
+        sh label: '', script: '''
+        sudo docker build -t webimage:$BUILD_NUMBER .'''
+
       }
     }
     stage('Deploy'){
       agent any
       steps{
-        sh label: '', script: '''rm -rf dockerimg
-mkdir dockerimg
-cd dockerimg
-cp -r /var/jenkins_home/workspace/jenkins-pipeline-example_master/target/* .
-sudo docker build -t webimage:$BUILD_NUMBER .
-sudo docker container run -itd --name webserver$BUILD_NUMBER -p 9090 webimage:$BUILD_NUMBER'''
+        sh label: '', script: '''
+        sudo docker container run -itd --name webserver$BUILD_NUMBER -p 9090 webimage:$BUILD_NUMBER'''
 
       }
     }

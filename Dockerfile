@@ -1,6 +1,6 @@
-FROM openjdk:8-jre
-RUN mkdir app
-ARG JAR_FILE
-ADD /target/${JAR_FILE} /app/spring-docker-spotify.jar
+FROM python:alpine3.7
+COPY . /app
 WORKDIR /app
-ENTRYPOINT java -jar spring-docker-spotify.jar
+RUN pip install -r requirements.txt
+EXPOSE 5000
+CMD python ./index.py
