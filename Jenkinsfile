@@ -39,6 +39,7 @@ mkdir dockerimg
 cd dockerimg
 sudo docker build -t webimage:$BUILD_NUMBER .
 sudo docker container run -itd --name webserver$BUILD_NUMBER -p 9090 webimage:$BUILD_NUMBER'''
+
       }
     }
   }
