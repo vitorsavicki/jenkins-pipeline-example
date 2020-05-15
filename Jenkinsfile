@@ -37,7 +37,14 @@ pipeline{
         sh label: '', script: '''rm -rf dockerimg
 mkdir dockerimg
 cd dockerimg
-cp -r /var/jenkins_home/workspace/jenkins-pipeline-example_master/target/* .
+cp /var/jenkins_home/workspace/jenkins-pipeline-example_master/Dockerfile .
+cp /var/jenkins_home/workspace/jenkins-pipeline-example_master/Jenkinsfile . 
+cp /var/jenkins_home/workspace/jenkins-pipeline-example_master/README.md .
+cp /var/jenkins_home/workspace/jenkins-pipeline-example_master/mvnw .
+cp /var/jenkins_home/workspace/jenkins-pipeline-example_master/mvnw.cmd .
+cp /var/jenkins_home/workspace/jenkins-pipeline-example_master/pom.xml .
+cp /var/jenkins_home/workspace/jenkins-pipeline-example_master/src .
+cp /var/jenkins_home/workspace/jenkins-pipeline-example_master/target .
 sudo docker build -t webimage:$BUILD_NUMBER .
 sudo docker container run -itd --name webserver$BUILD_NUMBER -p 9090 webimage:$BUILD_NUMBER'''
 
