@@ -16,7 +16,7 @@ pipeline{
     stage('Test'){
       agent any
       steps{
-        //sh 'mvn test'
+        sh 'mvn test'
       }
     } 
     stage('Package'){
