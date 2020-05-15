@@ -37,7 +37,7 @@ pipeline{
         sh label: '', script: '''rm -rf dockerimg
 mkdir dockerimg
 cd dockerimg
-cp /var/jenkins_home/workspace/jenkins-pipeline-example/gameoflife-web/target/gameoflife.war .
+cp /var/jenkins_home/workspace/jenkins-pipeline-example_master/gameoflife-web/target/gameoflife.war .
 touch dockerfile
 cat <<EOT>>dockerfile
 FROM tomcat
