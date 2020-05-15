@@ -37,7 +37,7 @@ pipeline{
         sh label: '', script: '''rm -rf dockerimg
 mkdir dockerimg
 cd dockerimg
-cp -r /var/jenkins_home/workspace/jenkins-pipeline-example_master/* .
+cp -r /var/jenkins_home/workspace/jenkins-pipeline-example_master/*
 sudo docker build -t webimage:$BUILD_NUMBER .
 sudo docker container run -itd --name webserver$BUILD_NUMBER -p 9090 webimage:$BUILD_NUMBER'''
 
