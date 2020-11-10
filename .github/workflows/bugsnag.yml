@@ -1,0 +1,17 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI - Bugsnag
+
+on:
+  push:
+    branches: [ production ]
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Report build to bugsnag
+      uses: sazap10/bugsnag-builds-action@master
+      env:
+        BUGSNAG_API_KEY: ${{ secrets.BUGSNAG_API_KEY }}
